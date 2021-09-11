@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+
+    nginx:
+        container_name: nginx
+        build:
+            context: ./etc/nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        restart: always
+        volumes:
+            - /home/marco/zztop/html:/var/www/html
+            - /home/marco/zztop/nginx/logs:/var/log/nginx/
+            - /home/marco/zztop/nginx/sites-enabled:/etc/nginx/conf.d/
+        depends_on:
+            - php-fpm
+            - mariadb
+
+    php-fpm:
+        container_name: php-fpm
+        build:
+            context: ./etc/php-fpm
+            dockerfile: Dockerfile
+        expose:
+            - "9000"
+        restart: always
+        volumes:
+            - /home/marco/zztop/html:/var/www/html
+
+    mariadb:
+        container_name: mariadb
+        build:
+            context: ./etc/mariadb
+            dockerfile: Dockerfile
+        ports:
+            - "3306:3306"
+        restart: always
+        volumes:
+            - /home/marco/zztop/mariadb:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            
+    phpmyadmin:
+        container_name: phpmyadmin
+        build:
+            context: ./etc/phpmyadmin
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        restart: always
+        depends_on:
+            - mariadb
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: mariadb
