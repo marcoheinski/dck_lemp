@@ -11,8 +11,8 @@ services:
             - ./logs:/var/log/nginx/
             - ./sites-enabled:/etc/nginx/conf.d/
         depends_on:
-            - php-fpm
-            - mysql
+            - php-fpm-01
+            - mysql-01
     php-fpm:
         container_name: php-fpm-01
         image: php:7.4-fpm
