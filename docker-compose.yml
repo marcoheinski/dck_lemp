@@ -1,7 +1,5 @@
 version: '3.8'
-
 services:
-
     nginx:
         container_name: nginx
         image: nginx:1.21
@@ -15,7 +13,6 @@ services:
         depends_on:
             - php-fpm
             - mariadb
-
     php-fpm:
         container_name: php-fpm
         image: php:7.4-fpm
@@ -24,7 +21,6 @@ services:
         restart: always
         volumes:
             - ./html:/var/www/html
-
     mariadb:
         container_name: mariadb
         image: mariadb:10.6
