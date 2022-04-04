@@ -1,8 +1,8 @@
 version: '3.8'
 services:
     nginx:
-        container_name: nginx
-        image: nginx:1.21
+        container_name: nginx-01
+        image: nginx:latest
         ports:
             - "80:80"
         restart: always
@@ -12,9 +12,9 @@ services:
             - ./sites-enabled:/etc/nginx/conf.d/
         depends_on:
             - php-fpm
-            - mariadb
+            - mysql
     php-fpm:
-        container_name: php-fpm
+        container_name: php-fpm-01
         image: php:7.4-fpm
         expose:
             - "9000"
@@ -22,12 +22,12 @@ services:
         volumes:
             - ./html:/var/www/html
     mariadb:
-        container_name: mariadb
-        image: mariadb:10.6
+        container_name: mysql-01
+        image: mysql:latest
         ports:
             - "3306:3306"
         restart: always
         volumes:
-            - ./mariadb:/var/lib/mysql
+            - ./mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
