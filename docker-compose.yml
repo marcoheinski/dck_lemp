@@ -1,27 +1,21 @@
 version: '3.8'
 
-networks:
-    vouprapraia:
-        driver:
-            bridge
 services:
     nginx:
-        container_name: nginx-vpp
+        container_name: vpp_nginx
         image: nginx:latest
         restart: always
         expose:
             - "80"
-        networks:
-            - vouprapraia
         volumes:
-            - ./html:/var/www/html
-            - ./logs:/var/log/nginx/
-            - ./sites-enabled:/etc/nginx/conf.d/
+            - /var/zztop/vouprapraia/html:/var/www/html
+            - /var/zztop/vouprapraia/logs:/var/log/nginx/
+            - /var/zztop/vouprapraia/config:/etc/nginx/conf.d/
         depends_on:
             - php-fpm
             - mysql
     php-fpm:
-        container_name: phpfpm-vpp
+        container_name: vpp_phpfpm
         image: php:7.4-fpm
         expose:
             - "9000"
@@ -29,9 +23,9 @@ services:
             - vouprapraia
         restart: always
         volumes:
-            - ./html:/var/www/html
+            - /var/zztop/vouprapraia/html:/var/www/html
     mysql:
-        container_name: mysql-vpp
+        container_name: vpp_mysql
         image: mysql:latest
         expose:
             - "3306"
@@ -39,6 +33,15 @@ services:
             - vouprapraia
         restart: always
         volumes:
-            - ./mysql:/var/lib/mysql
+            - /var/zztop/vouprapraia/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
+    phpmyadmin:
+        container_name: vpp_phpmyadmin
+        image: phpmyadmin
+        restart: always
+        depends_on:
+            - mysql
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: mysql
