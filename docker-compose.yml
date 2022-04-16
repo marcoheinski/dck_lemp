@@ -3,8 +3,6 @@ services:
     nginx:
         container_name: nginx-01
         image: nginx:latest
-        ports:
-            - "80:80"
         restart: always
         volumes:
             - ./html:/var/www/html
@@ -14,18 +12,14 @@ services:
             - php-fpm
             - mysql
     php-fpm:
-        container_name: php-fpm-01
+        container_name: phpfpm-01
         image: php:7.4-fpm
-        expose:
-            - "9000"
         restart: always
         volumes:
             - ./html:/var/www/html
     mysql:
         container_name: mysql-01
         image: mysql:latest
-        ports:
-            - "3306:3306"
         restart: always
         volumes:
             - ./mysql:/var/lib/mysql
