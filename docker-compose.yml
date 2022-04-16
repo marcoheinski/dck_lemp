@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
     nginx:
         container_name: vpp_nginx
@@ -19,8 +18,6 @@ services:
         image: php:7.4-fpm
         expose:
             - "9000"
-        networks:
-            - vouprapraia
         restart: always
         volumes:
             - /var/zztop/vouprapraia/html:/var/www/html
@@ -29,8 +26,6 @@ services:
         image: mysql:latest
         expose:
             - "3306"
-        networks:
-            - vouprapraia
         restart: always
         volumes:
             - /var/zztop/vouprapraia/mysql:/var/lib/mysql
