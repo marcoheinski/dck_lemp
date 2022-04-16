@@ -10,7 +10,7 @@ services:
         image: nginx:latest
         restart: always
         expose:
-            - "555"
+            - "80"
         networks:
             - vouprapraia
         volumes:
