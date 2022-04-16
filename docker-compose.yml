@@ -9,6 +9,8 @@ services:
         container_name: nginx-vpp
         image: nginx:latest
         restart: always
+        expose:
+            - "555"
         networks:
             - vouprapraia
         volumes:
