@@ -1,7 +1,7 @@
 version: '3.8'
 services:
     nginx:
-        container_name: nginx-01
+        container_name: nginx-vpp
         image: nginx:latest
         restart: always
         volumes:
@@ -12,13 +12,13 @@ services:
             - php-fpm
             - mysql
     php-fpm:
-        container_name: phpfpm-01
+        container_name: phpfpm-vpp
         image: php:7.4-fpm
         restart: always
         volumes:
             - ./html:/var/www/html
     mysql:
-        container_name: mysql-01
+        container_name: mysql-vpp
         image: mysql:latest
         restart: always
         volumes:
