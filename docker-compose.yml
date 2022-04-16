@@ -14,12 +14,16 @@ services:
     php-fpm:
         container_name: phpfpm-vpp
         image: php:7.4-fpm
+        expose:
+            - "9000"
         restart: always
         volumes:
             - ./html:/var/www/html
     mysql:
         container_name: mysql-vpp
         image: mysql:latest
+        expose:
+            - "3306"
         restart: always
         volumes:
             - ./mysql:/var/lib/mysql
