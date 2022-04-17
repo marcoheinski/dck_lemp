@@ -32,7 +32,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: root
     phpmyadmin:
-        container_name: phpmyadmin-vpp
+        container_name: vpp_phpmyadmin
         image: phpmyadmin
         expose:
             - "8888"
