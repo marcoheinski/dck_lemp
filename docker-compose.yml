@@ -31,3 +31,14 @@ services:
             - /var/zztop/vouprapraia/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
+    phpmyadmin:
+        container_name: phpmyadmin-vpp
+        image: phpmyadmin
+        expose:
+            - "8888"
+        restart: always
+        depends_on:
+            - mysql
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: mysql
