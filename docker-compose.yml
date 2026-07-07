@@ -30,3 +30,17 @@ services:
             - /var/zztop/vouprapraia/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
+<<<<<<< HEAD
+=======
+    phpmyadmin:
+        container_name: vpp_phpmyadmin
+        image: phpmyadmin
+        ports:
+            - "8888:80"
+        restart: always
+        depends_on:
+            - mysql
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: mysql
+>>>>>>> 26162e6cee5bcd6bdcf25387cef6855f6a4866ea
